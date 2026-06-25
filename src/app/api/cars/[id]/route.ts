@@ -5,11 +5,12 @@ import { authOptions } from '@/lib/auth';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const car = await prisma.car.findUnique({
-      where: { id: params.id, deletedAt: null },
+      where: { id, deletedAt: null },
       include: { brand: true }
     });
     
@@ -31,8 +32,9 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
@@ -42,7 +44,7 @@ export async function PUT(
     const data = await request.json();
     
     const car = await prisma.car.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         name: data.name,
         brandId: data.brandId,
@@ -76,8 +78,9 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
@@ -85,7 +88,7 @@ export async function DELETE(
     }
 
     await prisma.car.update({
-      where: { id: params.id },
+      where: { id },
       data: { deletedAt: new Date() }
     });
     
