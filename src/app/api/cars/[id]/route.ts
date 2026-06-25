@@ -18,9 +18,11 @@ export async function GET(
       return NextResponse.json({ error: 'Car not found' }, { status: 404 });
     }
     
-    // Parse images from JSON string to array
+    // Parse images from JSON string to array and convert Decimal to number
     const carWithImages = {
       ...car,
+      price: Number(car.price),
+      kilometer: Number(car.kilometer),
       images: car.images ? JSON.parse(car.images) : []
     };
     
@@ -64,9 +66,11 @@ export async function PUT(
       }
     });
     
-    // Parse images back to array for response
+    // Parse images back to array and convert Decimal to number for response
     const carWithImages = {
       ...car,
+      price: Number(car.price),
+      kilometer: Number(car.kilometer),
       images: car.images ? JSON.parse(car.images) : []
     };
     

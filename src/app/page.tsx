@@ -48,9 +48,11 @@ export default async function Home() {
     take: 6
   });
   
-  // Parse images from JSON string to array
+  // Parse images from JSON string to array and convert Decimal to number
   const featuredCars: CarWithBrand[] = carsData.map(car => ({
     ...car,
+    price: Number(car.price),
+    kilometer: Number(car.kilometer),
     images: car.images ? JSON.parse(car.images) : []
   }));
 

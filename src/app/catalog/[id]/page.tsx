@@ -45,9 +45,11 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
     notFound();
   }
 
-  // Parse images from JSON string to array
+  // Parse images from JSON string to array and convert Decimal to number
   const car: CarWithBrand = {
     ...carData,
+    price: Number(carData.price),
+    kilometer: Number(carData.kilometer),
     images: carData.images ? JSON.parse(carData.images) : []
   };
 

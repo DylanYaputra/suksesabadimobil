@@ -11,9 +11,11 @@ export async function GET() {
       include: { brand: true },
       orderBy: { createdAt: 'desc' }
     });
-    // Parse images from JSON string to array
+    // Parse images from JSON string to array and convert Decimal to number
     const carsWithImages = cars.map(car => ({
       ...car,
+      price: Number(car.price),
+      kilometer: Number(car.kilometer),
       images: car.images ? JSON.parse(car.images) : []
     }));
     return NextResponse.json(carsWithImages);
@@ -51,9 +53,11 @@ export async function POST(request: Request) {
       }
     });
     
-    // Parse images back to array for response
+    // Parse images back to array and convert Decimal to number for response
     const carWithImages = {
       ...car,
+      price: Number(car.price),
+      kilometer: Number(car.kilometer),
       images: car.images ? JSON.parse(car.images) : []
     };
     
