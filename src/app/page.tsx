@@ -11,6 +11,25 @@ import { formatPrice } from "@/lib/format";
 import { WHATSAPP_NUMBER } from "@/config/whatsapp";
 import prisma from "@/lib/db";
 
+interface CarWithBrand {
+  id: string;
+  name: string;
+  brand: { id: string; name: string };
+  model: string;
+  year: number;
+  price: number;
+  kilometer: number;
+  color: string;
+  plateNumber: string;
+  transmission: string;
+  fuelType: string;
+  engineCapacity: string;
+  description: string;
+  status: string;
+  featured: boolean;
+  images: string[];
+}
+
 export default async function Home() {
   const carsData = await prisma.car.findMany({
     where: {
@@ -23,7 +42,7 @@ export default async function Home() {
   });
   
   // Parse images from JSON string to array
-  const featuredCars = carsData.map(car => ({
+  const featuredCars: CarWithBrand[] = carsData.map(car => ({
     ...car,
     images: car.images ? JSON.parse(car.images) : []
   }));

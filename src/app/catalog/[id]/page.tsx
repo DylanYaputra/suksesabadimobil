@@ -72,7 +72,7 @@ Mohon informasinya, terima kasih!`;
 
               {car.images.length > 1 && (
                 <div className="grid grid-cols-4 gap-4">
-                  {car.images.map((img, index) => (
+                  {car.images.map((img: string, index: number) => (
                     <div key={index} className="aspect-square relative overflow-hidden rounded-xl bg-muted">
                       <Image 
                         src={img} 
