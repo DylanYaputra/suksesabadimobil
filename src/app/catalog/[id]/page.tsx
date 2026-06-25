@@ -11,6 +11,25 @@ import { formatPrice } from "@/lib/format";
 import { WHATSAPP_NUMBER } from "@/config/whatsapp";
 import prisma from "@/lib/db";
 
+interface CarWithBrand {
+  id: string;
+  name: string;
+  brand: { id: string; name: string };
+  model: string;
+  year: number;
+  price: number;
+  kilometer: number;
+  color: string;
+  plateNumber: string;
+  transmission: string;
+  fuelType: string;
+  engineCapacity: string;
+  description: string;
+  status: string;
+  featured: boolean;
+  images: string[];
+}
+
 interface CarDetailPageProps {
   params: Promise<{ id: string }>;
 }
@@ -27,7 +46,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
   }
 
   // Parse images from JSON string to array
-  const car = {
+  const car: CarWithBrand = {
     ...carData,
     images: carData.images ? JSON.parse(carData.images) : []
   };

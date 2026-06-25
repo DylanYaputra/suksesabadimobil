@@ -88,7 +88,7 @@ export default function AdminBrands() {
       </div>
 
       <div className="grid gap-4">
-        {brands.map((brand) => (
+        {brands.map((brand: Brand) => (
           <Card key={brand.id}>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">

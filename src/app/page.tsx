@@ -11,6 +11,13 @@ import { formatPrice } from "@/lib/format";
 import { WHATSAPP_NUMBER } from "@/config/whatsapp";
 import prisma from "@/lib/db";
 
+interface Testimonial {
+  id: string;
+  name: string;
+  photo: string;
+  content: string;
+}
+
 interface CarWithBrand {
   id: string;
   name: string;
@@ -140,7 +147,7 @@ export default async function Home() {
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredCars.map((car) => (
+              {featuredCars.map((car: CarWithBrand) => (
                 <Link key={car.id} href={`/catalog/${car.id}`}>
                   <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
                     <div className="relative">
@@ -191,11 +198,11 @@ export default async function Home() {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial) => (
+              {testimonials.map((testimonial: Testimonial) => (
                 <Card key={testimonial.id}>
                   <CardContent className="p-6">
                     <div className="flex gap-1 mb-4">
-                      {[1, 2, 3, 4, 5].map((i) => (
+                      {[1, 2, 3, 4, 5].map((i: number) => (
                         <Star key={i} className="h-5 w-5 text-yellow-500 fill-yellow-500" />
                       ))}
                     </div>

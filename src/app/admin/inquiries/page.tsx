@@ -28,7 +28,7 @@ export default function AdminInquiries() {
       <h1 className="text-3xl font-bold mb-8">Inquiry Pelanggan</h1>
 
       <div className="grid gap-4">
-        {inquiries.map((inquiry) => (
+        {inquiries.map((inquiry: Inquiry) => (
           <Card key={inquiry.id}>
             <CardContent className="p-6">
               <div className="flex items-start justify-between gap-4">

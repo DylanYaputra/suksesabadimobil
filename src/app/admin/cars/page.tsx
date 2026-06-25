@@ -216,7 +216,7 @@ export default function AdminCars() {
       </div>
 
       <div className="grid gap-4">
-        {cars.map((car) => (
+        {cars.map((car: Car) => (
           <Card key={car.id}>
             <CardContent className="p-6">
               <div className="flex items-center gap-6">
@@ -285,7 +285,7 @@ export default function AdminCars() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {brands.map(brand => (
+                    {brands.map((brand: Brand) => (
                       <SelectItem key={brand.id} value={brand.id}>{brand.name}</SelectItem>
                     ))}
                   </SelectContent>
@@ -444,9 +444,9 @@ export default function AdminCars() {
             </div>
 
             <div className="space-y-2">
-              <Label>Gambar</Label>
-              <div className="grid grid-cols-4 gap-4 mb-4">
-                {formData.images.map((img, index) => (
+                <Label>Gambar</Label>
+                <div className="grid grid-cols-4 gap-4 mb-4">
+                  {formData.images.map((img: string, index: number) => (
                   <div key={index} className="aspect-square relative overflow-hidden rounded-lg border">
                     <Image 
                       src={img} 

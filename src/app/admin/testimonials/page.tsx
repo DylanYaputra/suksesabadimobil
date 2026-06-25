@@ -126,7 +126,7 @@ export default function AdminTestimonials() {
       </div>
 
       <div className="grid gap-4">
-        {testimonials.map((testimonial) => (
+        {testimonials.map((testimonial: Testimonial) => (
           <Card key={testimonial.id}>
             <CardContent className="p-6">
               <div className="flex items-start gap-4">

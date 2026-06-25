@@ -9,14 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Car, CheckCircle, XCircle, MessageSquare, Plus } from "lucide-react";
 import { formatPrice } from "@/lib/format";
 
-interface Stats {
-  totalCars: number;
-  readyCars: number;
-  soldCars: number;
-  totalInquiries: number;
-}
-
-interface CarType {
+interface Car {
   id: string;
   name: string;
   brand: { id: string; name: string };
@@ -36,9 +29,16 @@ interface CarType {
   createdAt: string;
 }
 
+interface Stats {
+  totalCars: number;
+  readyCars: number;
+  soldCars: number;
+  totalInquiries: number;
+}
+
 export default function Dashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
-  const [cars, setCars] = useState<CarType[]>([]);
+  const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -119,7 +119,7 @@ export default function Dashboard() {
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cars.slice(0, 6).map((car) => (
+          {cars.slice(0, 6).map((car: Car) => (
             <Link key={car.id} href={`/admin/cars`}>
               <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
                 <div className="relative">

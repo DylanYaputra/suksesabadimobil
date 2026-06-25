@@ -135,7 +135,7 @@ export default function Catalog() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="">Semua merk</SelectItem>
-                      {brands.map((brand) => (
+                      {brands.map((brand: Brand) => (
                         <SelectItem key={brand.id} value={brand.id}>
                           {brand.name}
                         </SelectItem>
@@ -154,7 +154,7 @@ export default function Catalog() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="">Semua tahun</SelectItem>
-                      {currentYears.map((year) => (
+                      {currentYears.map((year: number) => (
                         <SelectItem key={year} value={year.toString()}>
                           {year}
                         </SelectItem>
@@ -241,7 +241,7 @@ export default function Catalog() {
           {/* Results */}
           {filteredCars.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredCars.map((car) => (
+              {filteredCars.map((car: Car) => (
                 <Link key={car.id} href={`/catalog/${car.id}`}>
                   <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
                     <div className="relative">
