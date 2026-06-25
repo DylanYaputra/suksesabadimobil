@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Brand {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  cars      Car[]
+}
+
+model Car {
+  id              String   @id @default(uuid())
+  name            String
+  brandId         String
+  model           String
+  year            Int
+  price           Decimal
+  kilometer       Int
+  color           String
+  plateNumber     String
+  transmission    String
+  fuelType        String
+  engineCapacity  String
+  description     String
+  status          String   @default("Ready")
+  featured        Boolean  @default(false)
+  images          String   // JSON string array
+  deletedAt       DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  brand           Brand    @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  inquiries       Inquiry[]
+  
+  @@index([brandId])
+  @@index([status])
+  @@index([featured])
+}
+
+model Testimonial {
+  id        String   @id @default(uuid())
+  name      String
+  photo     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Inquiry {
+  id        String   @id @default(uuid())
+  carId     String
+  name      String
+  phone     String
+  message   String?
+  createdAt DateTime @default(now())
+  
+  car       Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
+}
